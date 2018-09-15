@@ -6,12 +6,10 @@ trait Hidrate {
         try {
             foreach ($valores as $atributo => $value) {
                 $metodoSet = 'set' . ucfirst($atributo);
-                if (method_exists($this, $metodoSet)) {
-                        $this->$metodoSet($value);                    
-                } else {
-                    return false;
-                   
+                if (!method_exists($this, $metodoSet)) {
+                        return false;
                 }
+                $this->$metodoSet($value);
             }
         } catch (Exception $ex) {
             return false;
