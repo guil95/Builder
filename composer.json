@@ -1,7 +1,7 @@
 {
     "name": "guil95/hidrate",
     "description": "Hydration of objects",
-    "type": "project",
+    "type": "library",
     "authors": [
         {
             "name": "Guilherme Henrique Rodrigues",
