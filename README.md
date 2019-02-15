@@ -3,7 +3,7 @@
 Trait that assists in the hydration of entities or classes that have the methods 'setters'
 
 # Install
-composer require guil95/hidrate
+`composer require guil95/hidrate`
 
 # Sample to use
 
