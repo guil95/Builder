@@ -11,8 +11,9 @@
     "minimum-stability": "dev",
     "require": {},
     "autoload": {
-	"psr-4": {
-	    "Hidrator\\": "src/"
-	}
-     }
+        "psr-4": {
+            "Hidrator\\": "src/"
+        }
+     },
+    "license": "MIT"
 }
