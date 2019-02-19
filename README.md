@@ -7,7 +7,7 @@ Trait that assists in the hydration of entities or classes that have the methods
 
 # Sample to use
 
-```
+```php
 //Entity class
 <?php
   namespace App\Entity;
@@ -27,7 +27,7 @@ Trait that assists in the hydration of entities or classes that have the methods
   }
 ```
 
-```
+```php
 //Repository class
 <?php
   namespace App\Repository;
