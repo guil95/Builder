@@ -1,4 +1,4 @@
-# Hidrator :elephant: 
+# Hydrator :elephant: 
 
 Trait that assists in the hydration of entities or classes that have the methods 'setters'
 
