@@ -19,11 +19,6 @@ Trait that assists in the hydration of entities or classes that have the methods
     use Hidrator;
     
     private $name;
-    
-    public function setName(string $name)
-    {
-      $this->name = $name;
-    }
   }
 ```
 
@@ -39,7 +34,7 @@ Trait that assists in the hydration of entities or classes that have the methods
     public function save()
     {
       $person = new Person();
-      $person->hidrate([
+      $person->buildAssoc([
         'name' => 'Guilherme'
       ]);
     }
