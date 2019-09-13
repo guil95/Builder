@@ -44,7 +44,7 @@ trait Builder
             if ($attributeType === 'object') {
                 if ($parameter->getType() != null) {
                     $class = $parameter->getType()->getName();
-                    if ($attributes[$parameter->getName()] instanceof $class) {
+                    if (get_class($attributes[$parameter->getName()]) !== $class)) {
                         throw new \Exception(
                             sprintf('Invalid type from parameter %s', $parameter->getName())
                         );
@@ -52,10 +52,12 @@ trait Builder
                 }
             }
 
-            if ($parameter->getType() != null && $attributeType!== $parameter->getType()->getName()) {
-                throw new \Exception(
-                    sprintf('Invalid type from parameter %s', $parameter->getName())
-                );
+            if ($attributeType === 'object') {
+                if ($parameter->getType() != null && $attributeType !== $parameter->getType()->getName()) {
+                    throw new \Exception(
+                        sprintf('Invalid type from parameter %s', $parameter->getName())
+                    );
+                }
             }
 
             $parametersToBuild[$parameter->getPosition()] = $attributes[$parameter->getName()];
