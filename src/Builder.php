@@ -31,11 +31,14 @@ trait Builder
 
         $parameters = $constructor->getParameters();
 
-        call_user_func('verifyRequiredParameters', $attributes, $parameters);
+        call_user_func([self::class, 'verifyRequiredParameters'], $attributes, $parameters);
 
         $parametersToBuild = [];
 
         foreach($parameters as $parameter) {
+            if (!isset($attributes[$parameter->getName()])) {
+                continue;
+            }
             $attributeType = self::getType($attributes[$parameter->getName()]);
 
             if ($attributeType === 'object') {
