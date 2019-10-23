@@ -8,6 +8,9 @@
             "email": "guilhermerodriguestb@gmail.com"
         }
     ],
+    "require": {
+        "php": ">=7.0"
+    },
     "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
