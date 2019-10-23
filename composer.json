@@ -9,9 +9,6 @@
         }
     ],
     "minimum-stability": "dev",
-    "require": {
-        "php": ">=7.0"
-    },
     "autoload": {
         "psr-4": {
             "Builder\\": "src/"
