@@ -8,35 +8,58 @@ Trait that assists in the hydration of entities or classes that have the methods
 # Sample to use
 
 ```php
-//Entity class
 <?php
-  namespace App\Entity;
-  
-  use Hidrator\Hidrator;
-  
-  class Person{
-  
-    use Hidrator;
+class Occupation
+{
+    use Builder;
     
+    /**
+     * @var string
+     */
+    private $description;
+
+    public function __construct(string $description)
+    {
+        $this->description = $description;
+    }
+}
+
+class Person
+{
+    use Builder;
+
+    /**
+     * @var integer
+     */
+    private $age;
+
+    /**
+     * @var string
+     */
     private $name;
-  }
+
+    /**
+     * @var Occupation
+     */
+    private $occupation;
+
+    public function __construct(string $name, int $age, Occupation $occupation)
+    {
+        $this->age = $age;
+        $this->name = $name;
+        $this->occupation = $occupation;
+    }
+}
 ```
 
 ```php
-//Repository class
 <?php
-  namespace App\Repository;
-  
-  use App\Entity\Person;
-  
-  class PersonRepository{
-
-    public function save()
-    {
-      $person = new Person();
-      $person->buildAssoc([
-        'name' => 'Guilherme'
-      ]);
-    }
-  }
+//Sample build person
+$person = Person::buildAssoc([
+    'age' => 24,
+    'name' => 'Guilherme Henrique Rodrigues',
+    'occupation' => Occupation::buildAssoc([
+        'description' => 'Software Engineer',
+    ])
+]);
 ```
