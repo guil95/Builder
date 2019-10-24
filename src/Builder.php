@@ -8,6 +8,7 @@ trait Builder
     /**
      * @param array $attributes
      * @return object
+     * @throws BuilderException
      * @throws \ReflectionException
      */
     public static function buildAssoc(array $attributes)
@@ -23,13 +24,11 @@ trait Builder
      * @param \ReflectionClass $reflector
      * @param array $attributes
      * @return array
-     * @throws \Exception
+     * @throws BuilderException
      */
     private static function retrieveParametersToBuild(\ReflectionClass $reflector, array $attributes): array
     {
-        $constructor = $reflector->getConstructor();
-
-        $parameters = $constructor->getParameters();
+        $parameters = $reflector->getConstructor()->getParameters();
 
         call_user_func([self::class, 'verifyRequiredParameters'], $attributes, $parameters);
 
@@ -45,7 +44,7 @@ trait Builder
                 if ($parameter->getType() != null) {
                     $class = $parameter->getType()->getName();
                     if (get_class($attributes[$parameter->getName()]) !== $class) {
-                        throw new \Exception(
+                        throw new BuilderException(
                             sprintf('Invalid type from parameter %s', $parameter->getName())
                         );
                     }
@@ -54,7 +53,7 @@ trait Builder
 
             if ($attributeType !== 'object') {
                 if ($parameter->getType() != null && $attributeType !== $parameter->getType()->getName()) {
-                    throw new \Exception(
+                    throw new BuilderException(
                         sprintf('Invalid type from parameter %s', $parameter->getName())
                     );
                 }
@@ -79,6 +78,11 @@ trait Builder
         return gettype($var);
     }
 
+    /**
+     * @param array $attributes
+     * @param array $parameters
+     * @throws BuilderException
+     */
     private function verifyRequiredParameters(array $attributes, array $parameters)
     {
         foreach ($parameters as $parameter) {
@@ -86,7 +90,7 @@ trait Builder
              * @var $parameter \ReflectionParameter
              */
             if (!$parameter->isOptional() && !isset($attributes[$parameter->getName()])) {
-                throw new \Exception(
+                throw new BuilderException(
                     sprintf('The parameter %s is required', $parameter->getName())
                 );
             }
