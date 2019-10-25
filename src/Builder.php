@@ -38,9 +38,8 @@ trait Builder
             if (!isset($attributes[$parameter->getName()])) {
                 continue;
             }
-            $attributeType = self::getType($attributes[$parameter->getName()]);
 
-            if ($attributeType === 'object') {
+            if (is_object($attributes[$parameter->getName()])) {
                 if ($parameter->getType() != null) {
                     $class = $parameter->getType()->getName();
                     if (get_class($attributes[$parameter->getName()]) !== $class) {
@@ -51,8 +50,11 @@ trait Builder
                 }
             }
 
-            if ($attributeType !== 'object') {
-                if ($parameter->getType() != null && $attributeType !== $parameter->getType()->getName()) {
+            if (!is_object($attributes[$parameter->getName()])) {
+                if (
+                    $parameter->getType() != null
+                    && self::getType($attributes[$parameter->getName()]) !== $parameter->getType()->getName()
+                ) {
                     throw new BuilderException(
                         sprintf('Invalid type from parameter %s', $parameter->getName())
                     );
