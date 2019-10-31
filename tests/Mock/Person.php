@@ -24,7 +24,7 @@ class Person
      */
     private $occupation;
 
-    public function __construct(string $name, int $age, Occupation $occupation)
+    public function __construct(string $name, int $age, ?Occupation $occupation = null)
     {
         $this->age = $age;
         $this->name = $name;

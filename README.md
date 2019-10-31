@@ -63,3 +63,14 @@ $person = Person::buildAssoc([
     ])
 ]);
 ```
+
+# Tests
+
+```
+composer tests
+```
+
+# Tests and coverage
+```
+make test-report
+```
